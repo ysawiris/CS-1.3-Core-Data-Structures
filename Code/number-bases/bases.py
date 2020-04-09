@@ -23,13 +23,13 @@ def decode(digits, base):
     # ...
     # TODO: Decode digits from any base (2 up to 36)
     # ...
-    #reverse the order of the array
+    #reverse the order of the string
     digits = digits[::-1]
     
     #set to zero 
     decodedValue = 0
 
-    #traverse thru the array 
+    #traverse thru the string
     for exp, digit in enumerate(digits):
         #check if digit is a number or a letter
         if digit.isalpha():
@@ -58,6 +58,20 @@ def encode(number, base):
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
+    #declare an empty string 
+    encodedValue = ""
+
+    #using number as our counter
+    while number > 0:
+        #check whether its a decimal, binary or hex
+        number, remainder = divmod(number, base)
+        if remainder >= 10:
+            encodedValue += chr(remainder + 87)
+        else:
+            encodedValue += str(remainder)
+    
+    #returning the reverse order of the endcodedValue 
+    return encodedValue[::-1]
 
 
 def convert(digits, base1, base2):
@@ -77,6 +91,8 @@ def convert(digits, base1, base2):
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
+    #HAH just use the functions we made
+    return encode(decode(digits, base1), base2)
 
 
 def main():
