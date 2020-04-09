@@ -53,7 +53,7 @@ def binary_search_iterative(array, item):
 
     while left <= right:
         
-        mid =  left + (right - left) // 2
+        mid =   right + left // 2
     
         # Check if x is present at mid 
         if array[mid] == item: 
