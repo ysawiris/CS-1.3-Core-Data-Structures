@@ -23,6 +23,24 @@ def decode(digits, base):
     # ...
     # TODO: Decode digits from any base (2 up to 36)
     # ...
+    #reverse the order of the array
+    digits = digits[::-1]
+    
+    #set to zero 
+    decodedValue = 0
+
+    #traverse thru the array 
+    for exp, digit in enumerate(digits):
+        #check if digit is a number or a letter
+        if digit.isalpha():
+            digit = int(digit, 16)
+        else:
+            digit = int(digit)
+        #add up the product of the dight times the product of base times exp 
+        decodedValue += (digit * (base ** exp))
+
+    #return new decodedValue
+    return decodedValue
 
 
 def encode(number, base):
