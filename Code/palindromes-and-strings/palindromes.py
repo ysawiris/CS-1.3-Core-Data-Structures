@@ -14,7 +14,7 @@ def is_palindrome(text):
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
     # return is_palindrome_iterative(text)
-    return is_palindrome_recursive(text)
+    return is_palindrome_recursive(text, 0, len(text) - 1)
 
 
 def is_palindrome_iterative(text):
@@ -25,8 +25,9 @@ def is_palindrome_iterative(text):
     right = len(text) - 1
 
     while left < right: 
+        
         #check if they do not match 
-        if text[left] != text[right]:
+        if text[left].upper() != text[right].upper():
             return False 
         
         #now that they match, lets move to the next indexes 
@@ -44,21 +45,26 @@ def is_palindrome_recursive(text, left=None, right=None):
     # TODO: implement the is_palindrome function recursively here
     # once implemented, change is_palindrome to call is_palindrome_recursive
     # to verify that your iterative implementation passes all tests
-    
     if left == None:
         left = 0 
     
     if right == None:
         right = len(text) - 1
-    
-    #base cases
 
     #this checks if we have check every char in text 
-    if left == right:
+    if left >= right:
         return True
+    
+    #base cases
+    #check is the value is alphabet and not char or symbol
+    if text[left].isalpha() is not True:
+        return is_palindrome_recursive(text, left + 1, right)
+    
+    if text[right].isalpha() is not True:
+        return is_palindrome_recursive(text, left, right - 1)
 
     #checks if the chars are a mismatch
-    if text[left] != text[right]:
+    if text[left].upper() != text[right].upper():
         return False 
     
     #call the function within itself 
