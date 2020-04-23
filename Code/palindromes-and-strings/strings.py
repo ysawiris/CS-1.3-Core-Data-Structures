@@ -35,6 +35,11 @@ def find_all_indexes(text, pattern):
     len_pattern = len(pattern)
     contains = []
     
+    if pattern == "":
+        for index in range(len(text)):
+            contains.append(index)
+        return contains
+
     for index in range(len(text)-len_pattern+1):
         if text[index:index+len_pattern] == pattern:
             contains.append(index)
