@@ -79,6 +79,16 @@ class LinkedList(object):
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node at the given index and return its data
+        node = self.head #start at the head node 
+        count = 0 #index of current node 
+
+        # Traverse through the linked list until you find the index
+        while node is not None:
+            if count == index:
+                return node.data
+            count += 1
+            node = node.next
+        
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
@@ -89,6 +99,12 @@ class LinkedList(object):
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
+        # Create a new node to hold the given item
+    
+        new_node = Node(item)
+
+        node = self.head #start at the head node 
+        count = 0 #index of current node 
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -105,6 +121,9 @@ class LinkedList(object):
         # Update tail to new node regardless
         self.tail = new_node
 
+        # add to the size counter 
+        self.size += 1 
+
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         Best and worst case running time: ??? under what conditions? [TODO]"""
@@ -119,6 +138,9 @@ class LinkedList(object):
             new_node.next = self.head
         # Update head to new node regardless
         self.head = new_node
+
+        # add to the size counter 
+        self.size += 1 
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -210,7 +232,9 @@ class LinkedList(object):
         else:
             # Otherwise raise an error to tell the user that delete has failed
             raise ValueError('Item not found: {}'.format(item))
-
+        #node was successfully deleted
+        #we can subrtact one from the size counter 
+        self.size -= 1
 
 def test_linked_list():
     ll = LinkedList()
