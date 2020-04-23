@@ -145,7 +145,25 @@ class LinkedList(object):
         Worst case running time: ??? under what conditions? [TODO]"""
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        pass
+        #best and worst case is both O(n). We have to loop through our list 
+        #until we find the node we are trying to replace. 
+
+        #set current node to the head of list
+        current_node = self.head
+
+        #loop through the linked list unitll the node data is equal to item 
+        while current_node is not None:
+            if current_node.data == old_item:
+                #now set the current node data set to new_item 
+                current_node.data = new_item
+                #to end our while loop 
+                return None
+            
+            #if not true, continue to the next node 
+            current_node = current_node.next
+
+        #let user know that item was not found    
+        raise ValueError(f'Item not found: {old_item}')
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
