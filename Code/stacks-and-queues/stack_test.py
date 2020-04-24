@@ -11,6 +11,10 @@ class StackTest(unittest.TestCase):
         assert s.peek() is None
         assert s.length() == 0
         assert s.is_empty() is True
+    
+    def test_empty(self):
+        s = Stack()
+        assert s.is_empty() is True
 
     def test_init_with_list(self):
         s = Stack(['A', 'B', 'C'])
