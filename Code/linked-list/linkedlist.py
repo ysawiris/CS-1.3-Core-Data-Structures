@@ -57,18 +57,19 @@ class LinkedList(object):
     def length(self):
         """Return the length of this linked list by traversing its nodes.
         Best and worst case running time: ??? under what conditions? [TODO]"""
-        # Node counter initialized to zero
-        node_count = 0
-        # Start at the head node
-        node = self.head
-        # Loop until the node is None, which is one node too far past the tail
-        while node is not None:
-            # Count one for this node
-            node_count += 1
-            # Skip to the next node
-            node = node.next
-        # Now node_count contains the number of nodes
-        return node_count
+        # # Node counter initialized to zero
+        # node_count = 0
+        # # Start at the head node
+        # node = self.head
+        # # Loop until the node is None, which is one node too far past the tail
+        # while node is not None:
+        #     # Count one for this node
+        #     node_count += 1
+        #     # Skip to the next node
+        #     node = node.next
+        # # Now node_count contains the number of nodes
+        # return node_count
+        return self.size
 
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
@@ -100,11 +101,30 @@ class LinkedList(object):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node before the given index and insert item after it
         # Create a new node to hold the given item
-    
+        if self.is_empty() or index == 0:
+            self.prepend(item)
+            return 
+        
+        if index == self.size:
+            self.append(item)
+            return
+        
+        node = self.head
         new_node = Node(item)
+        count = 0
+        
+        while count < index:
+            node = node.next
+            count += 1
+        
+        new_node.next = node.next
+        node.next = new_node
 
-        node = self.head #start at the head node 
-        count = 0 #index of current node 
+        self.size += 1
+
+            
+            
+        
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
